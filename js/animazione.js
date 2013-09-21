@@ -34,7 +34,7 @@ function init() {
 		}	
 		if (i == 1) {
 			$(this).children("div").css( "display","block");
-			if ($(".controler")) {alert('pippo')};
+			if (!$(".controler")) {alert('pippo')};
 			comandi($(this).children("div"));
 		}	
 		if (i == 2) {

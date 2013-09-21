@@ -14,9 +14,6 @@
 		<link rel="stylesheet" href="style.css">
 		<script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
 		<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.min.js" type="text/javascript"></script>
-		<script src="js/animazione.js"type="text/javascript"></script>
-		
-		
 	</head>
 	<body>
 		<div id="visore">
@@ -79,7 +76,8 @@
 			</div>		
 		</div>	
 
-		<div style="clear:both; height:1000px;">Prova	</div>
+		<div style="clear:both;">Prova	</div>
+		<script src="js/animazione.js"type="text/javascript"></script>
 	</body>
 </html>
 
