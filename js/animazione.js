@@ -1,13 +1,5 @@
 $(function(){
 	init();
-	var timer = null;	
-	$(window).bind('resize', function() {  
-		if (timer) clearTimeout(timer);  
-		timer = setTimeout(init, 100);  
-	});
-	$('.controler').click(function() {
-		animazione();
-	});
 });
 
 /*SETTAGGIO DELLA GRAFICA DEL CAROUSEL*/
@@ -20,10 +12,10 @@ function init() {
 	marginFirst=((width_img-((width_finestra-width_visore)/2))*-1);
 	$(".content-copertina").css( "width",width_content_img+"px");	
 	if (marginFirst < 0) {
-		var marginFirstElement=marginFirst+"px";
+		marginFirstElement=marginFirst+"px";
 	}
 	else {
-		var marginFirstElement=0;
+		marginFirstElement=0;
 	}
 	$(".detail").each(function (i,el) {
 		id = el.id; 
@@ -32,8 +24,8 @@ function init() {
 			$(this).css( "margin-left",marginFirstElement);
 		}	
 		if (i == 1) {
+			$(this).css( "margin-left",0);
 			$(this).children("div").css( "display","block");
-			
 			if ($(".controler").length == 0) {
 				comandi($(this).children("div"));
 			}	
@@ -42,18 +34,33 @@ function init() {
 			$(this).css( "margin-left",width_box_button+"px");
 		}		
 	});
+	
+	var timer = null;	
+	$(window).bind('resize', function() {  
+		if (timer) clearTimeout(timer);  
+		timer = setTimeout(init, 100);  
+	});
+
+	$('.controler').click(function() {
+		animazione();
+	});
 };
 
 function animazione() {
-	$(".testo").fadeOut( "slow");
-	$(".detail").each(function (i,el) {
-		if (i == 0) {
-		    var margin_left=(marginFirst+(width_img*-1))+"px";
-			alert (margin_left);
-			$(this).animate({"margin-left":margin_left},1500);
-		}	
+	$(".testo").fadeOut( "slow",function(){$(".controler").remove()});
+	var details = $('.detail');
+    var margin_left=(width_img*-1)+"px";
+	$(details[2]).animate({"margin-left":0},1500 ,function(){
+		$(details[0]).animate({"margin-left":margin_left},500);
+		$(details[1]).animate({"margin-left":marginFirstElement},1500,function(){
+			$('.content-copertina .detail:first').css("margin-left",0).appendTo('.content-copertina');
+		});
 	});
-}
+
+	
+
+
+};
 
 function comandi(el) {
 	$("<p class='controler'>avanti</p>").appendTo(el);
@@ -62,6 +69,7 @@ function comandi(el) {
 
 
 $(function(){
+
 	sezione=0;
 	$('.freccia').click(function(){
 	    if (this.id=='freccia_d') {

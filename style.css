@@ -63,7 +63,7 @@ body{
 	position:absolute;
 	z-index:10;
 	margin:-357px 0 0 615px;
-	background:rgba(255,255,255,0.8);
+	background:rgb(255,255,255);
 	width:364px;
 	height:357px;
 }
