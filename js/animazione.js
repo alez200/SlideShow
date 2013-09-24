@@ -6,36 +6,37 @@ $(function(){
 		timer = setTimeout(init, 100);  
 	});
 	$('.controler').click(function() {
-		alert ("attiva animazione");
+		animazione();
 	});
 });
 
 /*SETTAGGIO DELLA GRAFICA DEL CAROUSEL*/
 function init() {
-	var width_finestra=$(window).width();
-	alert (width_finestra);
-	var width_img=$(".detail").width();
-	var width_visore=$(".content-visore").width();
-	var width_box_button=$(".vivi-santena").width();
-	var width_content_img=($(".detail").length*width_img)+width_box_button;
-	var marginFirstElement=((width_img-((width_finestra-width_visore)/2))*-1);
+	width_finestra=$(window).width();
+	width_img=$(".detail").width();
+	width_visore=$(".content-visore").width();
+	width_box_button=$(".vivi-santena").width();
+	width_content_img=($(".detail").length*width_img)+width_box_button;
+	marginFirst=((width_img-((width_finestra-width_visore)/2))*-1);
 	$(".content-copertina").css( "width",width_content_img+"px");	
-	if (marginFirstElement < 0) {
-		var marginFirstElement=marginFirstElement+"px";
+	if (marginFirst < 0) {
+		var marginFirstElement=marginFirst+"px";
 	}
 	else {
 		var marginFirstElement=0;
 	}
 	$(".detail").each(function (i,el) {
-		var id = el.id; 
-		var indice=i;
+		id = el.id; 
+		indice=i;
 		if (i == 0) {
 			$(this).css( "margin-left",marginFirstElement);
 		}	
 		if (i == 1) {
 			$(this).children("div").css( "display","block");
-			if (!$(".controler")) {alert('pippo')};
-			comandi($(this).children("div"));
+			
+			if ($(".controler").length == 0) {
+				comandi($(this).children("div"));
+			}	
 		}	
 		if (i == 2) {
 			$(this).css( "margin-left",width_box_button+"px");
@@ -43,6 +44,16 @@ function init() {
 	});
 };
 
+function animazione() {
+	$(".testo").fadeOut( "slow");
+	$(".detail").each(function (i,el) {
+		if (i == 0) {
+		    var margin_left=(marginFirst+(width_img*-1))+"px";
+			alert (margin_left);
+			$(this).animate({"margin-left":margin_left},1500);
+		}	
+	});
+}
 
 function comandi(el) {
 	$("<p class='controler'>avanti</p>").appendTo(el);
