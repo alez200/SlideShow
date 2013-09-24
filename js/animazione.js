@@ -54,6 +54,7 @@ function animazione() {
 		$(details[0]).animate({"margin-left":margin_left},500);
 		$(details[1]).animate({"margin-left":marginFirstElement},1500,function(){
 			$('.content-copertina .detail:first').css("margin-left",0).appendTo('.content-copertina');
+			init();
 		});
 	});
 
