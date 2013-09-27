@@ -1,6 +1,13 @@
 $(function(){
 	init();
+	var timer = null;	
+	$(window).bind('resize', function() {  
+		if (timer) clearTimeout(timer);  
+		timer = setTimeout(init, 100);  
+	});	
+	
 });
+
 
 /*SETTAGGIO DELLA GRAFICA DEL CAROUSEL*/
 function init() {
@@ -9,7 +16,10 @@ function init() {
 	width_visore=$(".content-visore").width();
 	width_box_button=$(".vivi-santena").width();
 	width_content_img=($(".detail").length*width_img)+width_box_button;
-	marginFirst=((width_img-((width_finestra-width_visore)/2))*-1);
+	margin=(width_finestra-width_visore)/2;
+	marginFirst=((width_img-margin)*-1);
+	marginPreFirst=marginFirst-width_img;
+	
 	$(".content-copertina").css( "width",width_content_img+"px");	
 	if (marginFirst < 0) {
 		marginFirstElement=marginFirst+"px";
@@ -34,19 +44,10 @@ function init() {
 			$(this).css( "margin-left",width_box_button+"px");
 		}		
 	});
-	
-	var timer = null;	
-	$(window).bind('resize', function() {  
-		if (timer) clearTimeout(timer);  
-		timer = setTimeout(init, 100);  
-	});
 
-	$('.controler').click(function() {
-		animazione();
-	});
 };
 
-function animazione() {
+function animazione_on() {
 	$(".testo").fadeOut( "slow",function(){$(".controler").remove()});
 	var details = $('.detail');
     var margin_left=(width_img*-1)+"px";
@@ -57,71 +58,38 @@ function animazione() {
 			init();
 		});
 	});
+};
 
-	
+function animazione_back() {
+	$(".testo").fadeOut( "slow",function(){$(".controler").remove()});
+    var margin_left=(width_img*-1)+"px";
+	$('.content-copertina .detail:last-child').css("margin-left",marginPreFirst+"px").prependTo('.content-copertina');
+	var details = $('.detail');
 
-
+	$(details[0]).animate({"margin-left":marginFirstElement},1500);
+    $(details[1]).animate({"margin-left":0},1000, function(){
+		$(details[2]).animate({"margin-left":width_box_button+"px"},1000);
+	});
+	//$(details[1]).animate({"margin-left":width_box_button+"px"},1500,function(){
+		//$('.content-copertina .detail:first').css("margin-left",0).appendTo('.content-copertina');
+		//init();
+	//});
 };
 
 function comandi(el) {
-	$("<p class='controler'>avanti</p>").appendTo(el);
+	$("<p class='controler'><span class='back'>Dietro</span><span class='auto'> > </span><span class='on'>Avanti</span></p>").appendTo(el);
+	
+	$('span.on').click(function() {
+		animazione_on();
+	});
+	$('span.back').click(function() {
+		animazione_back();
+	});
+	$('span.auto').click(function() {
+		//animazione_auto();
+		alert ('Automatizzo');
+	});	
 }
  
-
-
-$(function(){
-
-	sezione=0;
-	$('.freccia').click(function(){
-	    if (this.id=='freccia_d') {
-			margin_value='-16.7%'
-			sezione=sezione+1;
-		}
-        else {
-			margin_value='0'
-		}		
-		$('#'+sezione).animate({"margin-left": margin_value}, 1500, callback);
-
-		if (this.id=='freccia_s') { 
-			sezione=sezione-1;
-			if (sezione==3){
-				$(".and").fadeOut("fast");
-			}
-		}	
-		changeArrow();
-	});
-});
-
-function callback(){
-	if (sezione==4) {
-		$(".and").fadeIn("fast");
-	}
-	else {
-		$(".and").hide();
-	}
-}
-
-function changeArrow(){ 
-	if (sezione==5){
-		$('#freccia_d').hide("fade");
-		$('.underscore').animate({"margin-left": '-100%'}, 1500);
-	}
-	else if  (sezione==4){
-		$('.underscore').animate({"top": '50%'}, 1000);
-		$('.underscore').animate({"left": '0'}, 1000);
-	}
-	else {
-		$('#freccia_d').show("fade");
-		$('.underscore').animate({"margin-left": '0'}, 1500);
-		$('.underscore').animate({"top": '40%'}, 500);
-		if  (sezione==1){
-			$('#freccia_s').show("fade");
-		}
-		else if  (sezione==0){
-			$('#freccia_s').hide("fade");
-		}
-	} 
-};			    
-			
 
 

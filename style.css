@@ -17,8 +17,8 @@ body{
     margin: 0 auto;
     overflow: hidden;
     width: 980px;
-	height:357px;
-	border:1px solid;
+	/*height:357px;
+	border:1px solid;*/
 	clear:both;
 }
 .copertina {
@@ -57,22 +57,35 @@ body{
 	font-size:0.923em/*12px*/;
 }
 
-
-
 .vivi-santena {
 	position:absolute;
 	z-index:10;
-	margin:-357px 0 0 615px;
+	margin:-358px 0 0 615px;
 	background:rgb(255,255,255);
 	width:364px;
-	height:357px;
+	height:358px;
 }
 .box-text {
 	width:310px;
 	background:rgba(0,0,0,0.8);
 	z-index:11;
-	height:357px;
-	margin:-357px 0 0 0;
+	height:358px;
+	margin:-358px 0 0 0;
 	position:absolute;
+}
+
+.maschera {
+	position:absolute;
+	z-index:1;
+	background:rgba(0,0,0,0.45);
+	height:357px;
+	width:143px;
+}
+.maschera.sinistra {
+	left:0;
+}
+.maschera.destra {
+	left:1000px;
+	margin-top:-357px;
 }
 
