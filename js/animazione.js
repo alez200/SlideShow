@@ -18,7 +18,21 @@ function init() {
 	width_content_img=($(".detail").length*width_img)+width_box_button;
 	margin=(width_finestra-width_visore)/2;
 	marginFirst=((width_img-margin)*-1);
-	marginPreFirst=marginFirst-width_img;
+	marginPreFirst=marginFirst-width_img
+	var maschera = $('.maschera');
+	var box_text = $('.box-text');
+	
+	if (box_text.length ==0) {
+		$('.vivi-santena').before("<div class='box-text'></div>");
+	};	
+	if (maschera.length ==0) {
+		$('.content-visore').before("<div class='maschera sinistra'></div>");
+		$('.content-visore').after("<div class='maschera destra'></div>");
+	};
+	$('.maschera').css("width",margin+"px");
+	$('.maschera.destra').css("left",(margin+width_visore)+"px");
+	$("#visore").css( "width","100%");	
+	$(".detail").css( "float","left");	
 	$(".content-copertina").css( "width",width_content_img+"px");	
 	if (marginFirst < 0) {
 		marginFirstElement=marginFirst+"px";
@@ -44,8 +58,7 @@ function init() {
 		}		
 	});
 	if (tempo==1) {
-		timeout = setTimeout('animazione_on();', 5000, function(){clearTimeout(timeout);});
-		
+		timeout = setTimeout('animazione_on();', 5000);
 	}	
 };
 
@@ -57,6 +70,8 @@ function animazione_on() {
 		$(details[0]).animate({"margin-left":margin_left},500);
 		$(details[1]).animate({"margin-left":marginFirstElement},1500,function(){
 			$('.content-copertina .detail:first').css("margin-left",0).appendTo('.content-copertina');
+			clearTimeout(timeout);
+			timeout=0;
 			init();
 		});
 	});

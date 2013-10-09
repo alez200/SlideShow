@@ -82,13 +82,13 @@ body{
 	z-index:1;
 	background:rgba(0,0,0,0.45);
 	height:357px;
-	width:0px;
-	margin:-357px 0 0;
+	width:143px;
 }
 .maschera.sinistra {
 	left:0;
 }
 .maschera.destra {
-
+	left:1000px;
+	margin-top:-357px;
 }
 

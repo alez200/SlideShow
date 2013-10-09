@@ -17,6 +17,7 @@
 		<script src="js/animazione.js"type="text/javascript"></script>
 	</head>
 	<body>
+
 		<div id="visore">
 			<div class="copertina">
 				<div class="content-copertina">
@@ -51,11 +52,8 @@
 				</div>
 			</div>		
 		
-		    <!--div class="maschera sinistra"></div-->
 			<div class="content-visore">
-				<div class="box-text">
-				
-				</div>
+
 				<div class="vivi-santena">
 					<h2>vivi <span>santena</span></h2>
 					<p><a href="/come-fare/" title="">Tutti servizi</a></p>
@@ -75,7 +73,7 @@
 					</ul>
 				</div>
 			</div>	
-			<!--div class="maschera destra"></div-->			
+
 		</div>	
 
 		<div style="clear:both;">Prova	</div>
